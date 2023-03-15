@@ -1,0 +1,99 @@
+:root {
+  --cor-principal: #006fb0;
+}
+
+body {
+  background-color: #fff;
+  color: #333;
+  font-family: Arial, sans-serif;
+  padding-left: 30px;
+  padding-right: 30px;
+}
+
+h1 {
+  text-align: center;
+  color: var(--cor-principal);
+}
+
+h2 {
+  color: var(--cor-principal);
+  margin-top: 0;
+}
+
+label {
+  display: inline-block;
+  width: 70px;
+  margin-right: 10px;
+  color: var(--cor-principal);
+  font-weight: bold;
+}
+
+input[type="number"] {
+  width: 60px;
+  padding: 5px;
+  border-radius: 5px;
+  border: 2px solid var(--cor-principal);
+  background-color: #fff;
+  color: #333;
+  font-size: 16px;
+}
+
+button {
+  padding: 10px;
+  border-radius: 5px;
+  border: none;
+  background-color: var(--cor-principal);
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: var(--cor-principal);
+}
+
+table {
+  border-collapse: collapse;
+  margin: 20px auto;
+}
+
+td {
+  padding: 5px;
+  border: 3px solid var(--cor-principal);
+  background-color: #fff;
+  color: #333;
+  font-size: 16px;
+  text-align: center;
+}
+
+tr {
+  border: 3px solid var(--cor-principal);
+}
+
+hr {
+  width: 100%;
+  text-align: left;
+  border: 1.5px dashed var(--cor-principal);
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.linha {
+  text-align: left;
+  width: 100%;
+}
+
+#determinante {
+  margin: 20px auto;
+  width: 200px;
+  padding: 10px;
+  background-color: var(--cor-principal);
+  color: #fff;
+  text-align: center;
+  font-size: 16px;
+  border-radius: 5px;
+}
+
+#determinante-container {
+  text-align: center;
+}

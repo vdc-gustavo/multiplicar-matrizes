@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="style.css">
+	<title>Cálculo de matriz</title>
+</head>
+
+<body>
+	<h1>Matrizes</h1>
+
+	<h2>Matriz 1</h2>
+	<label for="mat1-linhas">Linhas:</label>
+	<input type="number" id="mat1-linhas">
+	<br>
+	<br>
+	<label for="mat1-colunas">Colunas:</label>
+	<input type="number" id="mat1-colunas">
+	<br>
+	<br>
+	<button onclick="criarMatriz(1)">Criar Matriz</button>
+	<div id="matriz1"></div>
+	<div class="linha">
+		<hr>
+	</div>
+
+	<h2>Matriz 2</h2>
+
+	<label for="mat2-linhas">Linhas:</label>
+	<input type="number" id="mat2-linhas">
+	<br><br>
+	<label for="mat2-colunas">Colunas:</label>
+	<input type="number" id="mat2-colunas">
+	<br><br>
+	<button onclick="criarMatriz(2)">Criar Matriz</button>
+	<div id="matriz2"></div>
+	<div class="linha">
+		<hr>
+	</div>
+	<button onclick="multiplicarMatrizes()">Multiplicar Matrizes</button>
+
+
+	<div id="matrizResultante"></div>
+	<div id="determinante-container">
+		<div id="determinante" style="display: none;"></div>
+	</div>
+
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/9.4.4/math.min.js"></script>
+	<script>
+		function criarMatriz(numeroMatriz) {
+			let linhas = Number(document.getElementById(`mat${numeroMatriz}-linhas`).value);
+			let colunas = Number(document.getElementById(`mat${numeroMatriz}-colunas`).value);
+			let matriz = document.createElement("table");
+			let input = document.createElement("input");
+			input.type = "number";
+			input.classList.add(`mat${numeroMatriz}-input`);
+			input.placeholder = "Valor";
+			matriz.appendChild(document.createElement("tbody"));
+			for (let i = 0; i < linhas; i++) {
+				let linha = document.createElement("tr");
+				for (let j = 0; j < colunas; j++) {
+					let celula = document.createElement("td");
+					celula.appendChild(input.cloneNode(true));
+					linha.appendChild(celula);
+				}
+				matriz.firstChild.appendChild(linha);
+			}
+			document.getElementById(`matriz${numeroMatriz}`).innerHTML = "";
+			document.getElementById(`matriz${numeroMatriz}`).appendChild(matriz);
+		}
+
+		function multiplicarMatrizes() {
+			let mat1Inputs = document.querySelectorAll(".mat1-input");
+			let mat2Inputs = document.querySelectorAll(".mat2-input");
+			let mat1Linhas = Number(document.getElementById("mat1-linhas").value);
+			let mat1Colunas = Number(document.getElementById("mat1-colunas").value);
+			let mat2Linhas = Number(document.getElementById("mat2-linhas").value);
+			let mat2Colunas = Number(document.getElementById("mat2-colunas").value);
+
+			if (mat1Colunas !== mat2Linhas) {
+				alert("O número de colunas da matriz 1 deve ser igual ao número de linhas da matriz 2."); return;
+			}
+
+			let mat1 = math.zeros(mat1Linhas, mat1Colunas)._data;
+			let mat2 = math.zeros(mat2Linhas, mat2Colunas)._data;
+
+			for (let i = 0; i < mat1Linhas; i++) {
+				for (let j = 0; j < mat1Colunas; j++) {
+					mat1[i][j] = Number(mat1Inputs[i * mat1Colunas + j].value);
+				}
+			}
+
+			for (let i = 0; i < mat2Linhas; i++) {
+				for (let j = 0; j < mat2Colunas; j++) {
+					mat2[i][j] = Number(mat2Inputs[i * mat2Colunas + j].value);
+				}
+			}
+
+			let matResultante = math.multiply(mat1, mat2);
+			let determinante = math.det(matResultante);
+
+			let tabela = document.createElement("table");
+			tabela.appendChild(document.createElement("tbody"));
+			for (let i = 0; i < matResultante.length; i++) {
+				let linha = document.createElement("tr");
+				for (let j = 0; j < matResultante[0].length; j++) {
+					let celula = document.createElement("td");
+					celula.innerText = matResultante[i][j];
+					linha.appendChild(celula);
+				}
+				tabela.firstChild.appendChild(linha);
+			}
+			document.getElementById("matrizResultante").innerHTML = "";
+			document.getElementById("matrizResultante").appendChild(tabela);
+
+			document.getElementById("determinante").innerText = `Determinante: ${determinante}`;
+			document.querySelector('#determinante').style.display = 'block'
+		}
+	</script>
+</body>
+
+</html>
